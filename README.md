@@ -10,6 +10,7 @@ A simple, browser-based tool to help instructors **upload marks, visualize distr
 - ✨ **Paste directly from Excel / Google Sheets** (no CSV needed!)
 - 🧹 Cleaner and faster grading interface (`New Grade - Simpler`)
 - ⚡ Automatic cleanup of empty rows and formatting
+- ✨ NC cutoff criteria asked before printing the pdf
 
 ### 📊 Smart Grading & Analytics
 - Interactive **histogram-based grading**
