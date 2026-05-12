@@ -1,6 +1,7 @@
 # 🎓 BITS Pilani Grade Moderator
 
 A simple, browser-based tool to help instructors **upload marks, visualize distributions, assign grades, and export results** — all without installing anything.
+<span style="font-size: 50px; color: red; font-weight: bold;">GLITCH REPORTED, PLEASE DOWNLOAD AFTER 5PM TODAY, LET ME FIX IT</span>
 
 ---
 
