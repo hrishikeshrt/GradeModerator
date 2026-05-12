@@ -684,18 +684,29 @@
     }
 
     /**
-     * Destroy the existing main histogram chart and draw a new one.
-     * Called after any cutoff change or grade toggle.
+     * Draw or update the main histogram.
+     * On the first call the chart is created from scratch.
+     * On subsequent calls only the grade-cutoff lines are updated via chart.update()
+     * — the canvas element is never destroyed, which prevents Chart.js from
+     * resetting inline canvas dimensions and causing the height-overflow glitch.
      *
      * @param {boolean} enableClick - whether bar clicks should open the student modal
      */
     function redrawMainHistogram(enableClick) {
-        if (mainChart) mainChart.destroy();
-        const ctx          = myCanvas.getContext("2d");
         const tempLineIndx = keepG.reduce(
             (acc, active, i) => { if (active) acc.push(gCutOffs[i] - markLowest); return acc; }, []
         );
 
+        if (mainChart) {
+            // Chart already exists — just update the cutoff-line positions and redraw.
+            // Avoids destroy() which resets canvas dimensions and breaks the layout.
+            mainChart.config.lineAtIndex = tempLineIndx;
+            mainChart.update('none');   // 'none' skips animation
+            return;
+        }
+
+        // First-time creation
+        const ctx = myCanvas.getContext("2d");
         mainChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -714,7 +725,8 @@
             lineAtIndex: tempLineIndx,
         });
 
-        // Attach bar-click handler so clicking a bar shows the student list modal
+        // Attach bar-click handler once — closure over mainChart stays valid
+        // because we never replace the instance after first creation.
         if (enableClick) {
             myCanvas.onclick = (evt) => {
                 const res = mainChart.getElementsAtEventForMode(
