@@ -72,7 +72,7 @@ Also works on:
 
 Need a quick walkthrough?
 
-👉 https://www.youtube.com/watch?v=-dX6KwiFTj4
+👉 https://youtu.be/ez0jZY4h_zU
 
 ---
 
